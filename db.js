@@ -2,15 +2,10 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 // const mongoURL = process.env.MONGODB_URL_LOCAL;
-
 const mongoURL = process.env.MONGODB_URL;
 
-// Setup mongodb connection
-mongoose.connect(mongoURL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  ssl: true
-});
+// Setup mongodb connection - REMOVED deprecated options
+mongoose.connect(mongoURL);
 
 const db = mongoose.connection;
 
@@ -26,4 +21,5 @@ db.on('disconnected', ()=>{
 db.on('error', (err)=>{
     console.log('MongoDB connection error', err);
 });
+
 module.exports = db;
